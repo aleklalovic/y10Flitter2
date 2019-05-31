@@ -1,0 +1,524 @@
+<html lang="en">    
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Roboto|Roboto+Condensed|Roboto+Slab" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Flitter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="sticky.js"></script>
+</head>
+
+    
+    <style>
+        
+   *{
+    margin: 0;
+    padding: 0;
+}
+.bg-image{
+    background: url('pexels-photo-573299.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-attachment: fixed;
+}
+.bw-gradient{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+11,0+100 */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.65) 11%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 11%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 11%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+.header{
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+}
+.sub-header{
+    position: relative;
+    width: 1200px;
+    height: 70px;
+    margin: 0 auto;
+    transition:0.5s;
+}
+.sub-header.active{
+    width: 100%;
+    background: black;
+    height: 50px;
+}
+.sub-header .left-menu{
+    float: left;
+}
+.sub-header .logo a{
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 15px;
+}
+
+.sub-header.active .logo a{
+    top:10px;
+    font-size: 20px;
+}
+
+.sub-header .right-menu{
+    float: right;
+}
+.sub-header ul li{
+    list-style: none;
+    min-width:100px;
+    font-size: 16px;
+    float: left;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    margin:20px 2px;
+    transition:0.5s;
+}
+.sub-header.active ul li{
+    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+}
+.sub-header ul li a{
+    text-decoration: none;
+    color:#fff;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: -0.1px;
+    text-transform: uppercase;
+    transition:0.5s;
+    display: block;
+    border-radius: 2px;
+}
+.sub-header.active ul li a{
+    color: #345999;
+}
+.sub-header ul li:hover a{
+    background: #39f60a;
+}
+.sub-header.active ul li:hover a{
+    background: black;
+}
+
+.para{
+    font-family: 'Playfair Display', sans-serif;
+    margin: 50px;
+    font-size: 16px;
+}
+
+@media screen and (max-width:1200px){
+    .sub-header{
+        width: 100%;
+    }
+}
+
+
+
+@media screen and (max-width:768px){
+    .sub-header ul{
+        position: relative;
+        top: 30px;
+        float: none;
+        display: block;
+    }
+   
+    .sub-header .logo a{
+        font-size: 30px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 8px;
+        display: block;
+    }
+    
+    .sub-header.active ul{
+        height: auto;
+        width :100%;
+        float: none;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+        top: 50px;
+    }
+    .sub-header.active ul li{
+        width: 100%;
+        display: block;
+
+    }
+   
+}
+
+@media screen and (max-width:605px){
+    .sub-header .right-menu{
+        float: left;
+    }
+}
+
+@media screen and (max-width:480px){
+    .sub-header ul{
+        width: 100%;
+        background: #fff;
+        color:#333;
+        top:50px;
+    }
+    .sub-header ul li{
+        list-style: none;
+        width:100%;
+        font-size: 16px;
+        float: none;
+        display: block;
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+        transition:0.5s;
+        color:#333;
+    }
+    .sub-header ul li a{
+        color: #333;
+    }
+    .sub-header .right-menu{
+        border-top :1px dashed #333;
+    }
+    .sub-header.active ul{
+        height: 0;
+        overflow: hidden;
+        transition: 0.5s;
+        border: none;
+    }
+    
+    
+    
+}
+
+        .btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Green */
+.success {
+  border-color: #4CAF50;
+  color: green;
+}
+
+.success:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Blue */
+.info {
+  border-color: #2196F3;
+  color: dodgerblue
+}
+
+.info:hover {
+  background: #2196F3;
+  color: white;
+}
+
+/* Orange */
+.warning {
+  border-color: #ff9800;
+  color: orange;
+}
+
+.warning:hover {
+  background: #ff9800;
+  color: white;
+}
+
+/* Red */
+.danger {
+  border-color: #f44336;
+  color: red
+}
+
+.danger:hover {
+  background: #f44336;
+  color: white;
+}
+
+/* Gray */
+.default {
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+ 
+        
+  
+        
+        
+        body, html {
+  height: 100%;
+}
+        
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%, 50%);
+  z-index: 2;
+  width: 30%;
+  padding: 20px;
+  text-align: center;
+}
+        
+.bg { 
+  /* The image used */
+  background-image: url("Landscape.jpg");
+
+  /* Full height */
+    /*height set to double */
+  height: 200%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+        
+
+    </style>
+    <script>
+        $(document).ready(function(){
+    $(window).on('scroll',function(){
+        if($(window).scrollTop()){
+            $(".sub-header").addClass('active');
+        }else{
+            $(".sub-header").removeClass('active');
+        }
+    });
+});
+        // Initialize Firebase
+        var config = {
+    apiKey: "AIzaSyBeFcaR4O736_9GdFiVvG87Uqi1cMi6cvg",
+    authDomain: "test-85ea9.firebaseapp.com",
+    databaseURL: "https://test-85ea9.firebaseio.com",
+    projectId: "test-85ea9",
+    storageBucket: "test-85ea9.appspot.com",
+    messagingSenderId: "574036882376"
+  };
+       
+    
+        
+        firebase.initializeApp(config);
+                
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                alert("Not logged in.");
+                return;
+            } else {
+                userId = user.uid;
+                name = user.displayName;
+                imageUrl = user.photoURL;
+                email = user.email;
+                    
+                // write user data to users
+                writeUserData(userId, name, email, imageUrl);
+                
+                // write data to document
+                mydiv = document.getElementById("mydata");
+                mydiv.innerHTML = name
+                myphotodiv = document.getElementById("myphoto");
+                myphotodiv.innerHTML = "<img src='" + imageUrl + "'/>";
+
+                firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets");  
+                    } else {
+                      /*
+                      console.log(data); 
+                      var mylist = "<ul>";
+                      for (var u in data) {
+                         console.log(data[u]);
+                         for (var t in data[u]) {
+                            console.log(data[u][t].tweet);
+                            mylist = mylist + "<li>" + data[u][t].tweet + "</li>";
+                         } 
+                      }
+                      mylist = mylist + "</ul>";
+                        console.log(mylist);
+                      var mytdiv = document.getElementById("mytweets");
+                      mytdiv.innerHTML = mylist;
+                      */
+                      updatetweets(data);
+                    }
+                });
+            } // end user null check
+        }); // end check auth state
+        
+        // write user data
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).set({
+                username: name,
+                email: email,
+                profile_picture : imageUrl
+            });
+        }
+        
+        function updatetweets(data) {
+            console.log(data); 
+            var mylist = "<ul>";
+            for (var u in data.tweets) {
+                var d = new Date(data[u].time);
+                var t = d.toString();
+                mylist = mylist + "<li>" + data[u].tweet + "(" + t + ")<li>";
+                
+            }
+            mylist = mylist + "</ul>";
+            console.log(mylist);
+            var mytdiv = document.getElementById("mytweets");
+            mytdiv.innerHTML = mylist;
+        }
+        
+        // write tweets to firebase
+        function tweet() {
+            
+            twitdoc = document.getElementById("twit");
+            var nameValue = twitdoc.value;
+            var js_time = Date.now();
+            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time:js_time});
+            twitdoc.value = "";
+            console.log("tweet written")
+            
+            firebase.database().ref('/tweets/' + userId).once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets");  
+                    } else {
+                      updatetweets(data);
+                    }
+                });
+            
+            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
+            
+        }
+        
+        
+        function signin() {
+            console.log("Signing in");
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) {  
+            });
+        }
+        
+        function signout() {
+            console.log("Signing out");
+            firebase.auth().signOut().then(function() {
+            });
+        }
+    
+    </script>
+
+    <body>
+        
+         
+         <header class="bg-image">
+        <div class="bw-gradient"></div>
+             
+        <div class="header">
+            
+            <div class="sub-header">
+                
+                    <ul class="left-menu">
+                        
+                            <li><a href="Events.html">FLITTS</a></li>
+                            <li><a href="About_Us.html">ABOUT US</a></li>
+                            <li><a href="mailto:flitter.help@gmail.com">CONTACT US</a></li>
+                        </ul>
+                        <div class="logo">
+                            <a href="#">Flitter</a>
+                        </div>
+                        <ul class="right-menu">
+                            <li><a href="welcome.html">HOME</a></li>
+                            <li><a href="Gallery.html">LEAKS</a></li>
+                            <li><a href="https://news.google.com/?hl=en-CA&gl=CA&ceid=CA:en">NEWS</a></li>
+                        </ul>
+                   <button onclick="signin()" class="btn info">Sign in</button>
+        <button onclick="signout()" class="btn danger">Sign out</button>
+                
+          
+                <div class="bg-text">
+                    
+  <h2>Alek and James</h2>
+  <h1 style="font-size:50px">Flitter</h1>
+  <p>Social media app</p>
+</div>
+ 
+                
+                
+          
+            </div>
+            
+            
+        </div>
+        
+        
+   
+            <div class="bg">
+     
+<br><br><br><br><br><br><br><br><br><br><br><br>  
+                <body>
+
+<img src="Cloud.png" alt="Trulli" width="500" height="333" align="left">
+
+</body>
+    
+     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+          <body>
+
+<img src="Cloud.png" alt="Trulli" width="500" height="333" align="center">
+
+</body>
+    
+            <br><br><br><br>
+                <body>
+
+<img src="Cloud.png" alt="Trulli" width="500" height="333" align="left">
+
+</body>
+ 
+    
+ 
+   <audio controls autoplay>
+  <source src="Empty.mp3" type="audio/mpeg">
+</audio>
+
+                
+        
+
+
+    
+</html>
+
